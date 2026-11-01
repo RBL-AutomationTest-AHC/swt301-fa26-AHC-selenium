@@ -1,0 +1,9 @@
+tcId,email,password,expectedOutcome,expectedMessage
+TC-LOGIN-001,${ACTIVE_EMAIL},${ACTIVE_PASSWORD},SUCCESS,
+TC-LOGIN-002,"  ${ACTIVE_EMAIL_UPPER}  ",${ACTIVE_PASSWORD},SUCCESS,
+TC-LOGIN-003,missing-${UNIQUE}@example.test,WrongPassword123!,ERROR,Email hoặc mật khẩu không đúng.
+TC-LOGIN-004,${ACTIVE_EMAIL},wrong-${UNIQUE},ERROR,Email hoặc mật khẩu không đúng.
+TC-LOGIN-005,invalid-email,AnyPassword123!,CLIENT_VALIDATION,
+TC-LOGIN-006,${ACTIVE_EMAIL},${ACTIVE_PASSWORD_CASE_CHANGED},ERROR,Email hoặc mật khẩu không đúng.
+TC-LOGIN-007,${ACTIVE_EMAIL},${PASSWORD_OVER_72_BYTES},ERROR,Mật khẩu tối đa 72 byte.
+TC-LOGIN-008,${LOCKED_EMAIL},${LOCKED_PASSWORD},ERROR,Tài khoản đã bị khóa hoặc ngừng hoạt động.
