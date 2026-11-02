@@ -5,8 +5,8 @@ Các nhánh cũ được giữ nguyên. Hai nhánh dưới được tạo riêng
 
 | Công việc theo tài liệu phân công | Head branch | Base PR trước khi merge framework |
 |---|---|---|
-| Issue #8 Framework và DynamicData | `chore/chuong-framework-pr` | `main` |
-| Issue #4 RegisterPage và RegisterTest | `feature/chuong-register-pr` | `chore/chuong-framework-pr` |
+| Issue #8 Framework và DynamicData | `chore/framework-pr` | `main` |
+| Issue #4 RegisterPage và RegisterTest | `feature/register-pr` | `chore/framework-pr` |
 
 Hai nhánh xếp nối tiếp. Merge framework trước, sau đó đổi base PR Register
 thành main. Nếu dùng squash merge và GitHub vẫn hiển thị commit framework
