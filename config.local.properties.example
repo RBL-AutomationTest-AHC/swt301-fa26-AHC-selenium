@@ -1,3 +1,0 @@
-# Copy to config.local.properties in the project root (ignored by Git).
-# Use forward slashes for Windows paths. Never put credentials in this example.
-sut.env.file=.env.local
