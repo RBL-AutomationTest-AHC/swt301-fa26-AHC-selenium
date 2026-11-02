@@ -16,7 +16,7 @@ class LoginTest extends BaseTest {
     private static final String CSV = "/testdata/login_data.csv";
 
     @Test
-    @DisplayName("TC-LOGIN-001")
+    @DisplayName("TC-LOGIN-001 - Đăng nhập thành công với tài khoản ACTIVE")
     void validLogin() {
         Map<String, String> data = data("TC-LOGIN-001");
         LoginPage page = new LoginPage(driver).open().login(data.get("email"), data.get("password")).waitUntilAuthenticated();
@@ -25,7 +25,7 @@ class LoginTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-LOGIN-002")
+    @DisplayName("TC-LOGIN-002 - Đăng nhập với email viết hoa và khoảng trắng đầu cuối")
     void normalizedEmail() {
         Map<String, String> data = data("TC-LOGIN-002");
         new LoginPage(driver).open().login(data.get("email"), data.get("password")).waitUntilAuthenticated();
@@ -33,19 +33,19 @@ class LoginTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-LOGIN-003")
+    @DisplayName("TC-LOGIN-003 - Từ chối đăng nhập khi email không tồn tại")
     void unknownEmail() {
         assertGenericError(data("TC-LOGIN-003"));
     }
 
     @Test
-    @DisplayName("TC-LOGIN-004")
+    @DisplayName("TC-LOGIN-004 - Từ chối đăng nhập khi mật khẩu sai")
     void wrongPassword() {
         assertGenericError(data("TC-LOGIN-004"));
     }
 
     @Test
-    @DisplayName("TC-LOGIN-005")
+    @DisplayName("TC-LOGIN-005 - Chặn email sai định dạng và các trường bắt buộc để trống")
     void clientValidation() {
         Map<String, String> data = data("TC-LOGIN-005");
         LoginPage page = new LoginPage(driver).open()
@@ -62,13 +62,13 @@ class LoginTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-LOGIN-006")
+    @DisplayName("TC-LOGIN-006 - Mật khẩu đăng nhập phân biệt chữ hoa và chữ thường")
     void passwordCaseSensitive() {
         assertGenericError(data("TC-LOGIN-006"));
     }
 
     @Test
-    @DisplayName("TC-LOGIN-007")
+    @DisplayName("TC-LOGIN-007 - Từ chối mật khẩu vượt quá 72 byte UTF-8")
     void passwordByteBoundary() {
         Map<String, String> data = data("TC-LOGIN-007");
         LoginPage page = new LoginPage(driver).open().login(data.get("email"), data.get("password"));
@@ -77,7 +77,7 @@ class LoginTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-LOGIN-008")
+    @DisplayName("TC-LOGIN-008 - Từ chối tài khoản bị khóa hoặc ngừng hoạt động")
     void lockedAccount() {
         Assumptions.assumeTrue(Config.hasFixture("LOCKED_EMAIL") && Config.hasFixture("LOCKED_PASSWORD"),
                 "BLOCKED: chưa có fixture account LOCKED/INACTIVE");
@@ -88,7 +88,7 @@ class LoginTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-LOGIN-009")
+    @DisplayName("TC-LOGIN-009 - Hiện và ẩn mật khẩu vẫn giữ nguyên giá trị đã nhập")
     void passwordVisibility() {
         String value = "Không-in-secret-123";
         LoginPage page = new LoginPage(driver).open().enterPassword(value);
@@ -106,7 +106,7 @@ class LoginTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-LOGIN-010")
+    @DisplayName("TC-LOGIN-010 - Giữ phiên khi tải lại trang và chặn trang bảo vệ sau đăng xuất")
     void sessionLifecycle() {
         Map<String, String> data = data("TC-LOGIN-001");
         LoginPage page = new LoginPage(driver).open().login(data.get("email"), data.get("password")).waitUntilAuthenticated();

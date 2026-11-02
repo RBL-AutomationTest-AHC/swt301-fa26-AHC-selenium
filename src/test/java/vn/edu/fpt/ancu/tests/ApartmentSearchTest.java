@@ -19,7 +19,7 @@ class ApartmentSearchTest extends BaseTest {
     private static final String CSV = "/testdata/apartment_search_data.csv";
 
     @Test
-    @DisplayName("TC-SEARCH-001")
+    @DisplayName("TC-SEARCH-001 - Tìm căn hộ theo một phần tiêu đề")
     void titleSubstring() {
         Map<String, String> data = data("TC-SEARCH-001");
         ApartmentSearchPage page = new ApartmentSearchPage(driver).open().keyword(data.get("query")).search();
@@ -27,7 +27,7 @@ class ApartmentSearchTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-SEARCH-002")
+    @DisplayName("TC-SEARCH-002 - Tìm căn hộ theo một phần địa chỉ")
     void addressSubstring() {
         Map<String, String> data = data("TC-SEARCH-002");
         ApartmentSearchPage page = new ApartmentSearchPage(driver).open().keyword(data.get("query")).search();
@@ -35,7 +35,7 @@ class ApartmentSearchTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-SEARCH-003")
+    @DisplayName("TC-SEARCH-003 - Tìm kiếm không phân biệt chữ hoa và chữ thường")
     void caseInsensitive() {
         Map<String, String> data = data("TC-SEARCH-003");
         ApartmentSearchPage page = new ApartmentSearchPage(driver).open().keyword(data.get("query")).search();
@@ -44,7 +44,7 @@ class ApartmentSearchTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-SEARCH-004")
+    @DisplayName("TC-SEARCH-004 - Lọc theo địa chỉ và xóa quận phường khi đổi thành phố")
     void hierarchicalAddress() {
         Map<String, String> data = data("TC-SEARCH-004");
         ApartmentSearchPage page = new ApartmentSearchPage(driver).open()
@@ -69,7 +69,7 @@ class ApartmentSearchTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-SEARCH-005")
+    @DisplayName("TC-SEARCH-005 - Lọc đúng giá khi giá tối thiểu bằng giá tối đa")
     void inclusiveRent() {
         Map<String, String> data = data("TC-SEARCH-005");
         BigDecimal expected = digits(data.get("minRent"));
@@ -81,14 +81,14 @@ class ApartmentSearchTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-SEARCH-006")
+    @DisplayName("TC-SEARCH-006 - Báo lỗi khi giá tối thiểu lớn hơn giá tối đa")
     void invalidRentRange() {
         ApartmentSearchPage page = new ApartmentSearchPage(driver).open().rent("10000000", "5000000").search();
         assertEquals("Giá tối thiểu phải nhỏ hơn hoặc bằng giá tối đa.", page.alert());
     }
 
     @Test
-    @DisplayName("TC-SEARCH-007")
+    @DisplayName("TC-SEARCH-007 - Lọc căn hộ Studio khi chọn 0 phòng ngủ")
     void studioFilter() {
         Map<String, String> data = data("TC-SEARCH-007");
         ApartmentSearchPage page = new ApartmentSearchPage(driver).open().bedrooms(data.get("bedrooms")).search();
@@ -98,7 +98,7 @@ class ApartmentSearchTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-SEARCH-008")
+    @DisplayName("TC-SEARCH-008 - Kết hợp từ khóa địa chỉ khoảng giá và số phòng ngủ")
     void combinedFilters() {
         Map<String, String> data = data("TC-SEARCH-008");
         ApartmentSearchPage page = new ApartmentSearchPage(driver).open()
@@ -122,7 +122,7 @@ class ApartmentSearchTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-SEARCH-009")
+    @DisplayName("TC-SEARCH-009 - Hiển thị thông báo khi không có căn hộ phù hợp")
     void emptyResult() {
         Map<String, String> data = data("TC-SEARCH-009");
         ApartmentSearchPage page = new ApartmentSearchPage(driver).open().keyword(data.get("query")).search();
@@ -133,7 +133,7 @@ class ApartmentSearchTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("TC-SEARCH-010")
+    @DisplayName("TC-SEARCH-010 - Phân trang và đưa về trang 1 khi tìm kiếm hoặc xóa bộ lọc")
     void paginationAndClear() {
         Map<String, String> data = data("TC-SEARCH-010");
         ApartmentSearchPage page = new ApartmentSearchPage(driver).open();
