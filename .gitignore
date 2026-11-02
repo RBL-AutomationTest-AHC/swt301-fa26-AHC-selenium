@@ -8,3 +8,7 @@ target/
 .vscode/
 .DS_Store
 *.log
+.env
+.env.local
+.env.*.local
+config.local.properties

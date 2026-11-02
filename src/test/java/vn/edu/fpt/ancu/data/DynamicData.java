@@ -38,6 +38,7 @@ public final class DynamicData {
             case "UNIQUE" -> context.unique();
             case "ACTIVE_PASSWORD", "LOCKED_PASSWORD" -> Config.requireSecret(token);
             case "ACTIVE_EMAIL_UPPER" -> Config.fixture("ACTIVE_EMAIL").toUpperCase(Locale.ROOT);
+            case "EXISTING_EMAIL_UPPER" -> Config.fixture("EXISTING_EMAIL").toUpperCase(Locale.ROOT);
             case "ACTIVE_PASSWORD_CASE_CHANGED" -> changeFirstLetterCase(Config.requireSecret("ACTIVE_PASSWORD"));
             case "PASSWORD_OVER_72_BYTES" -> "é".repeat(37);
             case "PASSWORD_73_BYTES" -> "é".repeat(36) + "a";

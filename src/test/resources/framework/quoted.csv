@@ -1,0 +1,2 @@
+﻿tcId,name,quoted,empty,email,repeat
+TC-DATA-001,"Chương, Nguyễn","a""b",,${UNIQUE}@example.test,${UNIQUE}@example.test

@@ -49,11 +49,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
                     <useModulePath>false</useModulePath>
                     <runOrder>alphabetical</runOrder>
-                    <systemPropertyVariables>
-                        <file.encoding>UTF-8</file.encoding>
-                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>

@@ -5,11 +5,11 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.opentest4j.TestAbortedException;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,7 +18,8 @@ public final class ScreenshotExtension implements AfterTestExecutionCallback {
 
     @Override
     public void afterTestExecution(ExtensionContext context) throws IOException {
-        if (context.getExecutionException().isEmpty()) {
+        if (context.getExecutionException().isEmpty()
+                || context.getExecutionException().get() instanceof TestAbortedException) {
             return;
         }
         Object instance = context.getRequiredTestInstance();
@@ -30,9 +31,14 @@ public final class ScreenshotExtension implements AfterTestExecutionCallback {
             return;
         }
         String tcId = context.getDisplayName().replaceAll("[^A-Za-z0-9_-]+", "-");
-        Path directory = Path.of("target", "screenshots");
-        Files.createDirectories(directory);
-        Path destination = directory.resolve(tcId + "__FAIL__" + STAMP.format(LocalDateTime.now()) + ".png");
-        Files.copy(camera.getScreenshotAs(OutputType.FILE).toPath(), destination, StandardCopyOption.REPLACE_EXISTING);
+        try {
+            Path directory = Path.of(vn.edu.fpt.ancu.config.Config.optional("screenshot.directory", "target/screenshots"));
+            Files.createDirectories(directory);
+            Path destination = directory.resolve(tcId + "__FAIL__" + STAMP.format(LocalDateTime.now()) + ".png");
+            Files.write(destination, camera.getScreenshotAs(OutputType.BYTES));
+        } catch (IOException | RuntimeException failure) {
+            // Keep the original assertion/driver failure as the primary failure.
+            context.getExecutionException().get().addSuppressed(failure);
+        }
     }
 }
