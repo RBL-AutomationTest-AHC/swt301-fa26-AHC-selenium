@@ -1,0 +1,11 @@
+tcId,fullName,email,password,confirmPassword,phone,expectedOutcome,expectedMessage,invalidField
+TC-REG-001,Nguyễn Văn Chương,rbl-${UNIQUE}@example.invalid,RblRegister123!,RblRegister123!,,SUCCESS,,
+TC-REG-002,,rbl-${UNIQUE}@example.invalid,RblRegister123!,RblRegister123!,,CLIENT_VALIDATION,,fullName
+TC-REG-003,Nguyễn Văn Chương,invalid-email,RblRegister123!,RblRegister123!,,CLIENT_VALIDATION,,email
+TC-REG-004,Nguyễn Văn Chương,${EXISTING_EMAIL_UPPER},RblRegister123!,RblRegister123!,,ERROR,Email đã được sử dụng. Vui lòng đăng nhập hoặc chọn email khác.,
+TC-REG-005,Nguyễn Văn Chương,rbl-${UNIQUE}@example.invalid,Abcde12345!,Abcde12345!,,CLIENT_VALIDATION,,password
+TC-REG-006,Nguyễn Văn Chương,rbl-${UNIQUE}@example.invalid,Abcdef12345!,Abcdef12345!,,SUCCESS,,
+TC-REG-007,Nguyễn Văn Chương,rbl-${UNIQUE}@example.invalid,${PASSWORD_73_BYTES},${PASSWORD_73_BYTES},,ERROR,Mật khẩu tối đa 72 byte UTF-8.,
+TC-REG-008,Nguyễn Văn Chương,rbl-${UNIQUE}@example.invalid,RblRegister123!,DifferentPassword123!,,ERROR,Mật khẩu xác nhận không khớp.,
+TC-REG-009,Nguyễn Văn Chương,rbl-${UNIQUE}@example.invalid,RblRegister123!,RblRegister123!,091 234 5678,SUCCESS,,
+TC-REG-010,Nguyễn Văn Chương,rbl-${UNIQUE}@example.invalid,RblRegister123!,RblRegister123!,091abc5678,ERROR,Số điện thoại cần dạng +849... hoặc số Việt Nam bắt đầu 0.,

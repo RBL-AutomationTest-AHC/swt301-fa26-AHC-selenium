@@ -1,0 +1,3 @@
+Run_ID,Scope,Date,Code_Baseline,Planned,Executed,Pass,Fail,Error,Skipped,Duration_Seconds,Evidence
+REG-RUN-01,Register only,2026-11-02,350260a + working tree later committed as 22eeeff,10,10,10,0,0,0,57.682,target/evidence/register-run-01/
+REG-RUN-02,Register only,2026-11-02,22eeeff,10,10,10,0,0,0,46.421,target/evidence/register-run-02/
