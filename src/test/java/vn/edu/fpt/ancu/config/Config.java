@@ -61,7 +61,9 @@ public final class Config {
 
     public static String fixture(String key) {
         String value = testValue(key);
-        if (!hasText(value)) throw new IllegalStateException("Thiếu fixture: " + key);
+        if (!hasText(value)) throw new IllegalStateException("Thiếu fixture: " + key
+                + ". Hãy nạp file fixture bằng -Dsut.env.file=<path> hoặc SUT_ENV_FILE; "
+                + "nếu chạy IntelliJ, thêm VM option này vào đúng cấu hình Run đang dùng.");
         return value.trim();
     }
 
@@ -72,13 +74,15 @@ public final class Config {
     private static String testValue(String key) {
         String value = System.getProperty(key);
         if (hasText(value)) return value;
+        value = System.getenv(key);
+        if (hasText(value) && !looksLikePastedTemplate(value)) return value;
         String alias = ENV_ALIASES.get(key);
         if (alias != null) {
+            value = System.getenv(alias);
+            if (hasText(value) && !looksLikePastedTemplate(value)) return value;
             value = FILE_ENV.getProperty(alias);
             if (hasText(value)) return value;
         }
-        value = System.getenv(key);
-        if (hasText(value) && !looksLikePastedTemplate(value)) return value;
         return FILE_ENV.getProperty(key);
     }
 
@@ -108,9 +112,15 @@ public final class Config {
         try (InputStream stream = Config.class.getResourceAsStream("/config.properties")) {
             if (stream == null) throw new IllegalStateException("Không tìm thấy /config.properties");
             properties.load(stream);
+            Path local = Path.of("config.local.properties");
+            if (Files.isRegularFile(local)) {
+                try (var reader = Files.newBufferedReader(local, StandardCharsets.UTF_8)) {
+                    properties.load(reader);
+                }
+            }
             return properties;
         } catch (IOException exception) {
-            throw new IllegalStateException("Không đọc được /config.properties", exception);
+            throw new IllegalStateException("Không đọc được config.properties hoặc config.local.properties", exception);
         }
     }
 
