@@ -1,0 +1,11 @@
+Run_ID,TC_ID,Method,Status,Duration_Seconds,Code_Commit
+REG-RUN-02,TC-REG-001,optionalPhone,PASS,8.553,22eeeff
+REG-RUN-02,TC-REG-002,requiredName,PASS,2.941,22eeeff
+REG-RUN-02,TC-REG-003,invalidEmail,PASS,2.589,22eeeff
+REG-RUN-02,TC-REG-004,duplicateEmail,PASS,3.276,22eeeff
+REG-RUN-02,TC-REG-005,passwordLength11,PASS,2.501,22eeeff
+REG-RUN-02,TC-REG-006,passwordLength12,PASS,9.338,22eeeff
+REG-RUN-02,TC-REG-007,passwordByte73,PASS,2.401,22eeeff
+REG-RUN-02,TC-REG-008,confirmationMismatch,PASS,2.793,22eeeff
+REG-RUN-02,TC-REG-009,normalizedVietnamPhone,PASS,8.662,22eeeff
+REG-RUN-02,TC-REG-010,invalidPhone,PASS,3.356,22eeeff
